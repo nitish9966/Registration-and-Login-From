@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import axios from 'axios'; // Correct import
+import axios from 'axios'; 
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-    const [name, setName] = useState(''); // Initialize with empty string
-    const [email, setEmail] = useState(''); // Initialize with empty string
-    const [password, setPassword] = useState(''); // Initialize with empty string
+    const [name, setName] = useState(''); 
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
+    const navigate=useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/register', { name, email, password }) // Use http instead of https
+        axios.post('http://localhost:3000/register', { name, email, password }) 
             .then(result => console.log(result))
             .catch(err => console.log(err));
             document.getElementById('name').value=""
             document.getElementById('email').value=""
             document.getElementById('password').value=""
+            navigate('/login')
     }
 
     return (
@@ -24,7 +27,7 @@ function Signup() {
                 <input 
                     type="text"
                     placeholder="Enter your Name"
-                    value={name} // Controlled input
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                     id="name"
                 /><br></br>
@@ -32,7 +35,7 @@ function Signup() {
                 <input 
                     type="email"
                     placeholder="Enter your Email"
-                    value={email} // Controlled input
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     id="email"
                 /><br></br>
@@ -40,7 +43,7 @@ function Signup() {
                 <input 
                     type="password"
                     placeholder="Enter your Password"
-                    value={password} // Controlled input
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     id="password"
                 /><br></br>
